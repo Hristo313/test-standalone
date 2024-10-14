@@ -29,9 +29,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         # cache: 'npm' # enable after committing lock file from first install
-    - run: echo "@infragistics:registry=https://packages.infragistics.com/npm/js-licensed/" >> ~/.npmrc
-    - run: echo "//packages.infragistics.com/npm/js-licensed/:_auth=${{ secrets.NPM_AUTH_TOKEN }}" >> ~/.npmrc
-    - run: echo "//packages.infragistics.com/npm/js-licensed/:always-auth=true" >> ~/.npmrc
+    - run: echo "@infragistics:registry=http://proget.infragistics.local:81/npm/js-licensed/" >> ~/.npmrc
+    - run: echo "//proget.infragistics.local:81/npm/js-licensed/:_auth=${{ secrets.NPM_AUTH_TOKEN }}" >> ~/.npmrc
+    - run: echo "//proget.infragistics.local:81/npm/js-licensed/:always-auth=true" >> ~/.npmrc
     - run: npm i # replace with 'npm ci' after committing lock file from first install
     - run: npm run lint
     - run: npm run build
@@ -43,9 +43,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set project name
       run: echo "PROJECT_NAME=$(jq -r '.name' package.json)" >> $GITHUB_ENV
-    - run: echo "@infragistics:registry=https://packages.infragistics.com/npm/js-licensed/" >> ~/.npmrc
-    - run: echo "//packages.infragistics.com/npm/js-licensed/:_auth=${{ secrets.NPM_AUTH_TOKEN }}" >> ~/.npmrc
-    - run: echo "//packages.infragistics.com/npm/js-licensed/:always-auth=true" >> ~/.npmrc
+    - run: echo "@infragistics:registry=http://proget.infragistics.local:81/npm/js-licensed/" >> ~/.npmrc
+    - run: echo "//proget.infragistics.local:81/npm/js-licensed/:_auth=${{ secrets.NPM_AUTH_TOKEN }}" >> ~/.npmrc
+    - run: echo "//proget.infragistics.local:81/npm/js-licensed/:always-auth=true" >> ~/.npmrc
     - run: npm i
     - name: Build project with dynamic base-href
       run: npm run build -- --base-href "https://${{ github.actor }}.github.io/${{ github.event.repository.name }}/"
